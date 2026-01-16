@@ -1,6 +1,12 @@
 <?php
 
-$product_id = (int)($data['product_id'] ?? 0);
-unset($_SESSION['cart'][$product_id]);
+function remove_cart ($product_id) {
+    session_start();
+    unset($_SESSION['cart'][$product_id]);
+     $response = [
+        'success' => 'true',
+        'data' => $_SESSION['cart']
+     ];
 
-echo json_encode(["success" => true, "cart" => $_SESSION['cart']]);
+     return $response;
+}

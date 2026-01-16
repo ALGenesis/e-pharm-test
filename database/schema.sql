@@ -80,19 +80,19 @@ CREATE TABLE IF NOT EXISTS orders_details (
   FOREIGN KEY (product_id) REFERENCES products (id)
 );
 
-CREATE TABLE IF NOT EXISTS cart {
+CREATE TABLE IF NOT EXISTS carts (
   id int PRIMARY KEY AUTO_INCREMENT,
   user_id int,
   created_at datetime DEFAULT CURRENT_TIMESTAMP,
   updated_at datetime DEFAULT CURRENT_TIMESTAMP,
-  FOREIGN KEY (user_id) REFERENCES users (id),
-};
+  FOREIGN KEY (user_id) REFERENCES users (id)
+);
 
-CREATE TABLE IF NOT EXISTS cart_items {
+CREATE TABLE IF NOT EXISTS cart_items (
   id int PRIMARY KEY AUTO_INCREMENT,
   cart_id int,
   product_id int,
   quantity int NOT NULL,
   FOREIGN KEY (cart_id) REFERENCES cart (id),
   FOREIGN KEY (product_id) REFERENCES products (id)
-};
+);
