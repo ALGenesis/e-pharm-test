@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS users (
   updated_at datetime DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE IF NOT EXISTS entreprises (
+CREATE TABLE IF NOT EXISTS pharmacies (
   id int PRIMARY KEY AUTO_INCREMENT,
   name varchar(50) NOT NULL,
   email varchar(50) NOT NULL,
@@ -29,10 +29,10 @@ CREATE TABLE IF NOT EXISTS roles (
 
 CREATE TABLE IF NOT EXISTS staff (
   id int PRIMARY KEY AUTO_INCREMENT,
-  entreprise_id int,
+  pharmacy_id int,
   user_id int,
   role int,
-  FOREIGN KEY (entreprise_id) REFERENCES  entreprises (id),
+  FOREIGN KEY (pharmacy_id) REFERENCES  pharmacies (id),
   FOREIGN KEY (user_id) REFERENCES  users (id),
   FOREIGN KEY (role) REFERENCES  roles (id)
 );
@@ -49,14 +49,14 @@ CREATE TABLE IF NOT EXISTS products (
   about varchar(255),
   description text,
   price varchar(255) NOT NULL,
-  category int,
+  category_id int,
   image varchar(255) NOT NULL,
   stock int NOT NULL,
-  created_by int,
+  pharmacy_id int,
   created_at datetime DEFAULT CURRENT_TIMESTAMP,
   updated_at datetime DEFAULT CURRENT_TIMESTAMP,
-  FOREIGN KEY (category) REFERENCES categories (id),
-  FOREIGN KEY (created_by) REFERENCES entreprises (id)
+  FOREIGN KEY (category_id) REFERENCES categories (id),
+  FOREIGN KEY (pharmacy_id) REFERENCES pharmacies (id)
 );
 
 
@@ -93,6 +93,6 @@ CREATE TABLE IF NOT EXISTS cart_items (
   cart_id int,
   product_id int,
   quantity int NOT NULL,
-  FOREIGN KEY (cart_id) REFERENCES cart (id),
+  FOREIGN KEY (cart_id) REFERENCES carts (id),
   FOREIGN KEY (product_id) REFERENCES products (id)
 );
