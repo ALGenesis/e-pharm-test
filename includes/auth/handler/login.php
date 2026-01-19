@@ -16,7 +16,7 @@ function handleLogin() {
     $password = trim($_POST['password']);
 
 
-    $user = getUserByEmail($email); 
+    $user = getUserByEmail($email, true); 
 
     if(!$user || !password_verify($password, $user['password'])) {
         $_SESSION['error'] = ['login' => 'Username and password are required.'];

@@ -11,7 +11,11 @@ function is_logged() {
     }
 }
 
-function is_admin() {
+function is_admin($user = null) {
+    if(isset($user)) {
+        return check_role($user) === 'admin';
+    }
+    
     set_session();
     if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') {
         return true;
@@ -46,6 +50,10 @@ function is_password_solid($password) {
 }
 
 function set_user_session($user) {
+    if(isset($user) && isset($user['password'])) {
+        unset($user['password']);
+    }
+
     set_session();
     $_SESSION['user_id'] = $user['id'];
     $_SESSION['username'] = $user['username'];
